@@ -29,12 +29,19 @@ body::-webkit-scrollbar {
 }
 
 main {
-	position:absolute;
-	width: 100%;
-	height: calc(100vw * 1080 / 1920);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100vw;
+	height: 56.25vw; /* 16:9 Aspect Ratio (1080/1920) */
+	max-height: 100vh;
+	max-width: 177.78vh; /* 16:9 Aspect Ratio */
 	background-image: url('img/board.jpg');
-	background-size: 100% auto;
+	background-size: cover;
+	background-position: center;
 	background-repeat: no-repeat;
+	background-color: black;
 }
 
 /* makes text seleciton and highlighting invisible */
@@ -317,10 +324,15 @@ html {
 /* ------- carousel ------------- */
 
 #carousel {
-	position:absolute;
-	width: 100%;
-	height: calc(100vw * 1080 / 1920);
-	z-index:90;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100vw;
+	height: 56.25vw;
+	max-height: 100vh;
+	max-width: 177.78vh;
+	z-index: 90;
 }
 
 /*
@@ -422,12 +434,15 @@ html {
 
 #popup {
 	position: absolute;
-    width: 100%;
-    height: calc(100vw * 1080 / 1920);
-    background-color: rgba(10,10,10,.95);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 56.25vw;
+	max-height: 100vh;
+	max-width: 177.78vh;
+    background-color: rgba(0,0,0,0.95);
     z-index: 1000;
-    /* background-image: url(img/boardtest10.png); */
-    /* background-size: contain; */
 }
 
 
@@ -495,9 +510,14 @@ html {
 /* --------------------- end screen ---------------------------  */
 
 #end-screen {
-	width: 100%;
-	height: calc(100vw * 1080 / 1920);
 	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100vw;
+	height: 56.25vw;
+	max-height: 100vh;
+	max-width: 177.78vh;
 	z-index: 1000;
 	background-color: rgba(10,10,10,0.95);
 }

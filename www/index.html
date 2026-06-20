@@ -8,7 +8,7 @@
 	<meta name="author" content="Arun Sundaram" />
 	<meta name="description" content="Juega al minijuego original de Gwent from The Witcher 3 in your browser! Includes cards from Hearts of Stone and Blood & Wine!" />
 	<meta name="keywords" content="arun, sundaram, programmer, gwent, tw3, witcher, card, game, gamedev, play" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
@@ -293,6 +293,7 @@
 <div data-title="Activar/desactivar música" id="toggle-music" class="center deck-menu settings-button"><img src="svg/music.svg"></img></div>
 <div data-title="Activar/desactivar efectos" id="toggle-sfx" class="center deck-menu settings-button"><img src="svg/sfx.svg"></img></div>
 <div data-title="Activar/desactivar mensajes" id="toggle-notifications" class="center deck-menu settings-button"><img src="svg/notification.svg"></img></div>
+	<div data-title="Ajustar Pantalla" id="open-calibration" class="center deck-menu settings-button" style="top: 45.3vw; left: 53.5vw; z-index: 86; cursor: pointer;"><img src="svg/view.svg" style="width: 2.5vw; height: 2.5vw;"></img></div>
 
 <script type="text/javascript" src="common.js"></script>
 <script type="text/javascript" src="cards.js"></script>
@@ -300,7 +301,7 @@
 <script type="text/javascript" src="abilities.js"></script>
 <script type="text/javascript" src="factions.js"></script>
 <script type="text/javascript" src="gwent.js"></script>
-<div id="gwent-cal-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:999999;background:rgba(0,0,0,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Arial,sans-serif;color:#fff;padding:20px;box-sizing:border-box;">
+<div id="gwent-cal-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:10000;background:rgba(0,0,0,0.85);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Arial,sans-serif;color:#fff;padding:20px;box-sizing:border-box;display:none;">
 <h2 style="color:goldenrod;margin:0 0 6px 0;font-size:22px;">Ajustar Pantalla</h2>
 <p style="color:#aaa;margin:0 0 14px 0;font-size:13px;">Ajusta para que el tablero entre completo</p>
 <div style="width:80%;max-width:360px;margin-bottom:10px;"><label style="display:flex;justify-content:space-between;font-size:13px;"><span>Escala: <b id="cv-escala">100</b>%</span></label><input type="range" id="cal-e" min="90" max="110" value="100" style="width:100%;height:36px;" /></div>
