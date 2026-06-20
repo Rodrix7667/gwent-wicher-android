@@ -1,0 +1,13 @@
+node_modules/
+www/node_modules/
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/captures/
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
