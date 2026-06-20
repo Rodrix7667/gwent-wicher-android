@@ -29,17 +29,15 @@ body::-webkit-scrollbar {
 }
 
 main {
-	position: absolute;
-	top: 0;
-	left: 0;
+	position: relative;
 	width: 100vw;
-	height: 100vh;
+	height: 56.25vw; /* Volvemos a la proporción base pero dentro de un contenedor negro */
 	background-image: url('img/board.jpg');
-	background-size: cover; /* Llenar sin deformar */
+	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: black;
-	overflow: hidden;
+	margin: auto;
 }
 
 /* makes text seleciton and highlighting invisible */
@@ -326,8 +324,9 @@ html {
 	top: 0;
 	left: 0;
 	width: 100vw;
-	height: 100vh;
+	height: 100%;
 	z-index: 90;
+	background-color: rgba(0,0,0,0.8);
 }
 
 /*
@@ -432,10 +431,10 @@ html {
 	top: 0;
 	left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     background-color: rgba(0,0,0,0.95);
     z-index: 1000;
-	display: flex;
+	display: none;
 	align-items: center;
 	justify-content: center;
 }
@@ -509,10 +508,10 @@ html {
 	top: 0;
 	left: 0;
 	width: 100vw;
-	height: 100vh;
+	height: 100%;
 	z-index: 1000;
 	background-color: rgba(0,0,0,0.95);
-	display: flex;
+	display: none;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;

@@ -1,41 +1,18 @@
 var STORAGE_KEY = 'gwent_cal';
-var wrapper = null;
 var overlay = document.getElementById('gwent-cal-overlay');
 
-function crearWrapper() {
-  if (document.getElementById('viewport-wrapper')) return;
-  wrapper = document.createElement('div');
-  wrapper.id = 'viewport-wrapper';
-  // Cambiamos el wrapper para que sea un contenedor flexible que centre el contenido
-  wrapper.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000;z-index:1;';
-  
-  var children = [];
-  // Movemos todos los elementos al wrapper excepto el overlay de calibración
-  var nodes = Array.from(document.body.childNodes);
-  nodes.forEach(node => {
-    if (node.id !== 'gwent-cal-overlay' && node !== document.currentScript) {
-      wrapper.appendChild(node);
-    }
-  });
-  
-  document.body.appendChild(wrapper);
-  document.body.style.cssText = 'margin:0;padding:0;background:#000;overflow:hidden;width:100%;height:100%;';
-}
-
 function aplicar() {
-  if (!wrapper) wrapper = document.getElementById('viewport-wrapper');
-  if (!wrapper) return;
+  var main = document.querySelector('main');
+  var deck = document.getElementById('deck-customization');
+  if (!main) return;
+  
   var saved = localStorage.getItem(STORAGE_KEY);
   if (saved) { 
     var p = JSON.parse(saved); 
     var s = (p.escala||100)/100; 
-    // Aplicamos la transformación a los elementos hijos directos del wrapper (como main)
-    Array.from(wrapper.children).forEach(child => {
-        if (child.tagName === 'MAIN' || child.id === 'deck-customization') {
-            child.style.transform = 'translate('+(p.x||0)+'px, '+(p.y||0)+'px) scale('+s+')';
-            child.style.transformOrigin = 'center center';
-        }
-    });
+    var transform = 'translate('+(p.x||0)+'px, '+(p.y||0)+'px) scale('+s+')';
+    main.style.transform = transform;
+    if(deck) deck.style.transform = transform;
   }
 }
 
@@ -48,11 +25,11 @@ function guardar() {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(v)); } catch(e) {}
   
   var s = v.escala/100;
-  Array.from(wrapper.children).forEach(child => {
-    if (child.tagName === 'MAIN' || child.id === 'deck-customization') {
-        child.style.transform = 'translate('+v.x+'px, '+v.y+'px) scale('+s+')';
-    }
-  });
+  var transform = 'translate('+v.x+'px, '+v.y+'px) scale('+s+')';
+  var main = document.querySelector('main');
+  var deck = document.getElementById('deck-customization');
+  if(main) main.style.transform = transform;
+  if(deck) deck.style.transform = transform;
 }
 
 function actualizar() {
@@ -63,8 +40,18 @@ function actualizar() {
 }
 
 function init() {
-  if (!document.querySelector('main')) { setTimeout(init, 100); return; }
-  crearWrapper(); 
+  var main = document.querySelector('main');
+  if (!main) { setTimeout(init, 100); return; }
+  
+  // Asegurar que el body sea negro y centrado
+  document.body.style.backgroundColor = '#000';
+  document.body.style.display = 'flex';
+  document.body.style.alignItems = 'center';
+  document.body.style.justifyContent = 'center';
+  document.body.style.minHeight = '100vh';
+  document.body.style.margin = '0';
+  document.body.style.overflow = 'hidden';
+
   aplicar();
   
   document.getElementById('cal-e').addEventListener('input', actualizar);
@@ -79,6 +66,13 @@ function init() {
     overlay.style.display='none';
   });
   
+  var openBtn = document.getElementById('open-calibration');
+  if(openBtn) {
+      openBtn.addEventListener('click', function() {
+          overlay.style.display = 'flex';
+      });
+  }
+
   overlay.addEventListener('click', function(e) { 
     if(e.target===overlay) overlay.style.display='none'; 
   });
@@ -96,13 +90,3 @@ function init() {
 }
 
 window.addEventListener('load', init);
-
-document.addEventListener('DOMContentLoaded', function() {
-    var btn = document.getElementById('open-calibration');
-    if (btn) {
-        btn.addEventListener('click', function() {
-            var ov = document.getElementById('gwent-cal-overlay');
-            if (ov) ov.style.display = 'flex';
-        });
-    }
-});
